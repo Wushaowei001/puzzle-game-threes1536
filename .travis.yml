@@ -1,0 +1,23 @@
+language: node_js
+node_js:
+  - '6.7.0'
+before_script:
+  - npm install -g bower
+  - bower install
+script:
+  # build
+  - npm run gulp 
+deploy:
+  # keep the build we just made with "npm run gulp"
+  provider: script
+  skip_cleanup: true
+  script: bash scripts/deploy.sh
+
+branches:
+  only:
+    - master
+
+notification:
+  email:
+    - ${GITHUB_MAIL}
+  on_success: always
